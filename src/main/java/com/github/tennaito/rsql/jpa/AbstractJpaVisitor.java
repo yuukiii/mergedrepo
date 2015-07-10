@@ -53,11 +53,11 @@ public abstract class AbstractJpaVisitor<T, E> implements RSQLVisitor<T, EntityM
 	 */
 	public AbstractJpaVisitor(E... e) {
 		// getting class from template... :P
-		if (e.length == 0) {
-			entityClass = (Class<E>)e.getClass().getComponentType();
-		} else {
-			entityClass = (Class<E>) e[0].getClass();
-		}		
+	  if (e.length == 0) {
+	    entityClass = (Class<E>)e.getClass().getComponentType();
+	  } else {
+	    entityClass = (Class<E>) e[0].getClass();
+	  }
 	}
 
 	/**
