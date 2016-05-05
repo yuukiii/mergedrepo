@@ -26,6 +26,7 @@ package com.github.tennaito.rsql.misc;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,12 +67,13 @@ public class DefaultArgumentParser implements ArgumentParser {
         // common types
         try {
             if (type.equals(String.class)) return (T) argument;
-            if (type.equals(Integer.class) || type.toString().equals("int")) return (T) Integer.valueOf(argument);
-            if (type.equals(Boolean.class) || type.toString().equals("boolean")) return (T) Boolean.valueOf(argument);
+            if (type.equals(Integer.class) || type.equals(int.class)) return (T) Integer.valueOf(argument);
+            if (type.equals(Boolean.class) || type.equals(boolean.class)) return (T) Boolean.valueOf(argument);
             if (type.isEnum()) return (T) Enum.valueOf((Class<Enum>)type, argument);
-            if (type.equals(Float.class) || type.toString().equals("float")) return (T) Float.valueOf(argument);
-            if (type.equals(Double.class) || type.toString().equals("double")) return (T) Double.valueOf(argument);
-            if (type.equals(Long.class) || type.toString().equals("long")) return (T) Long.valueOf(argument);
+            if (type.equals(Float.class)   || type.equals(float.class)) return (T) Float.valueOf(argument);
+            if (type.equals(Double.class)  || type.equals(double.class)) return (T) Double.valueOf(argument);
+            if (type.equals(Long.class)    || type.equals(long.class)) return (T) Long.valueOf(argument);
+            if (type.equals(BigDecimal.class) ) return (T) new BigDecimal(argument);
         } catch (IllegalArgumentException ex) {
             throw new ArgumentFormatException(argument, type);
         }
